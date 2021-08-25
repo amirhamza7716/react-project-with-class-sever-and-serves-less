@@ -1,0 +1,129 @@
+import { createStore, combineReducers } from 'redux';
+
+let data1 = { users: ["ali", "ahmed", "rameez"] };
+
+function studentReducer(oldData = data1, newData) {
+
+    oldData = { ...oldData };
+
+    if (newData.type == "ADDING_STUDENT") {
+
+        oldData.users.push(newData.myName);
+
+    } else if (newData.type == "REMOVING_STUDENT") {
+
+        oldData.users.splice(newData.myName);
+
+    }
+
+    return oldData;
+
+}
+
+let data2 = { users: ["sultan", "furqan", "jutt"] };
+
+function teacherReducer(oldData = data2, newData) {
+
+    oldData = { ...oldData };
+
+    if (newData.type == "ADDING_TEACHER") {
+
+        oldData.users.push(newData.myName);
+
+    } else if (newData.type == "REMOVING_TEACHER") {
+
+        oldData.users.splice(newData.myName);
+
+    }
+
+    return oldData;
+
+}
+
+let allReducers = combineReducers({ studentReducer, teacherReducer })
+
+const myStore = createStore(allReducers);
+
+export default myStore;
+
+
+
+*************************************
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import nSTore from './store/store'
+import { Provider } from 'react-redux';
+
+import List from './myList';
+
+export default function App(props) {
+
+    let city = "FSD";
+
+    return <div>
+        <Provider store={nSTore}>
+
+            <div>
+                <input id="one" />
+                <button onClick={() => {
+
+                    nSTore.dispatch({
+                        type: "ADDING_STUDENT",
+                        city: "FSD",
+                        myName: document.getElementById('one').value
+                    });
+
+
+                }}>Add data</button>
+            </div>
+
+            <List />
+
+        </Provider>
+
+    </div>;
+
+}
+
+
+***************************************
+
+import React from 'react';
+import { connect } from 'react-redux';
+import { func } from 'prop-types';
+
+function List(props) {
+
+    return <div>
+
+        <ol>
+            {
+                props.myStudents.users.map((user) => {
+
+                    return <li>{user}</li>
+
+                })
+            }
+        </ol>
+ 
+
+    </div>
+
+}
+
+
+
+let newList = connect((store) => {
+
+    return {
+        myStudents:store.studentReducer
+    };
+
+
+})(List)
+
+
+export default newList;

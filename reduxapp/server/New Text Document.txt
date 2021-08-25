@@ -1,0 +1,30 @@
+let express = require('express');
+
+let myApp= express();
+
+myApp.get('/', function(req, res){
+
+    res.sendfile('./index.html');
+
+});
+
+myApp.get('/login', function(req, res){
+    
+    res.sendfile('./1.jpg');
+    //res.end("hello g");
+    // res.json({
+    //     name:"Khurram"
+    // });
+
+    console.log("logging");
+});
+
+myApp.listen(5050, function(){    
+    console.log("I am chaling");
+});
+
+
+// let data = require('./data');
+
+// console.log(data.users)
+// console.log(data.sayHello())

@@ -1,0 +1,260 @@
+import React, { useState, useEffect } from 'react';
+import nSTore from './store/store'
+import { Provider, connect } from 'react-redux';
+import M from 'materialize-css';
+import store from './store/store';
+import './App.css';
+
+
+function MyDropdown() {
+
+    return <>
+        <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
+        <ul onClick={(evt)=>{
+
+            store.dispatch({
+                type:"FILER_ADS",
+                by:evt.target.innerText
+            });
+
+        }} id='dropdown1' class='dropdown-content'>
+            <li><a href="#!">All</a></li>            
+            <li><a href="#!">Sindh</a></li>            
+            <li><a href="#!">Punjab</a></li>            
+        </ul>
+    </>;
+
+}
+
+function Login() {
+
+    return <div id="modal1" class="modal">
+        <div class="modal-content">
+            <main>
+                <center>
+
+
+                    <div class="container">
+                        <div class="z-depth-1 grey lighten-4 row" style={{ display: 'inline-block', padding: '32px 48px 0px 48px', border: '1px solid #EEE' }}>
+
+                            <form class="col s12" method="post">
+                                <div class='row'>
+                                    <div class='col s12'>
+                                    </div>
+                                </div>
+
+                                <div class='row'>
+                                    <div class='input-field col s12'>
+                                        <input class='validate' type='email' name='email' id='email' />
+                                        <label for='email'>Enter your email</label>
+                                    </div>
+                                </div>
+
+                                <div class='row'>
+                                    <div class='input-field col s12'>
+                                        <input class='validate' type='password' name='password' id='password' />
+                                        <label for='password'>Enter your password</label>
+                                    </div>
+                                    <label style={{ float: 'right' }}>
+                                        <a class='pink-text' href='#!'><b>Forgot Password?</b></a>
+                                    </label>
+                                </div>
+
+                                <br />
+                                <center>
+                                    <div class='row'>
+                                        <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo'>Login</button>
+                                    </div>
+                                </center>
+                            </form>
+                        </div>
+                    </div>
+
+                </center>
+
+            </main>
+        </div>
+
+    </div>
+
+}
+
+function Header() {
+
+    return <nav>
+        <Login />
+        <MyDropdown />
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo">Logo</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="sass.html">Sass</a></li>
+                <li><a onClick={() => {
+
+                    var loginModal = M.Dropdown.init(document.querySelectorAll('.dropdown-trigger')[0], {
+                        onOpenStart: () => {
+                            // alert('hahaha');
+                        }
+                    });
+                    loginModal.open();
+
+                }}>Show Options</a></li>
+                <li><a onClick={() => {
+
+                    var loginModal = M.Modal.init(document.getElementById('modal1'), {
+                        onOpenStart: () => {
+                            // alert('hahaha');
+                        }
+                    });
+                    loginModal.open();
+
+                }}>Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+}
+
+function AdBox(props) {
+
+
+    return <>
+        <div>
+            {
+                props.adsReducer.filtered.map((ad) => {
+
+                return <div className="adBox">
+
+                    <img src={ad.pic} />
+                    <h1>{ad.price}</h1>
+                    <h5>{ad.description}</h5>
+                    <h6>{ad.province}</h6>
+                
+                </div>;
+
+                })
+            }
+        </div>
+    </>;
+
+}
+
+let NewAdBox = connect((store) => {
+    return store;
+})(AdBox);
+
+export default function App(props) {
+
+
+
+    return <div>
+        <Provider store={store}>
+
+            <Header />
+            
+
+            <NewAdBox />
+        </Provider>
+
+    </div>;
+
+}
+
+*******************************************
+
+
+
+
+
+import { createStore, combineReducers } from 'redux';
+
+let ads = {
+    filtered: [],
+    ads: [
+        {
+            province: "Punjab",
+            description: "This is car 1",
+            price: 1000,
+            pic: "https://apollo-singapore.akamaized.net/v1/files/365nnjj55g4v1-PK/image;s=272x0"
+        },
+        {
+            province: "Punjab",
+            description: "This is car 2",
+            price: 2000,
+            pic: "https://apollo-singapore.akamaized.net/v1/files/trm09imhaixh3-PK/image;s=272x0"
+        },
+        {
+            province: "Sindh",
+            description: "This is car 1",
+            price: 3000,
+            pic: "https://apollo-singapore.akamaized.net/v1/files/tw0s2mjvwgcs3-PK/image;s=272x0"
+        },
+        {
+            province: "Punjab",
+            description: "This is car 3",
+            price: 4000,
+            pic: "https://apollo-singapore.akamaized.net/v1/files/3s7rwct13r8n2-PK/image;s=272x0"
+        }
+    ]
+};
+
+function adsReducer(state = ads, newData) {
+
+    state = { ...state, filtered: state.ads };
+
+    switch (newData.type) {
+
+        case 'FILER_ADS':
+
+            if (newData.by == "All") {
+                state.filtered = state.ads;
+
+            } else {
+                state.filtered = state.ads.filter((ad) => {
+                    return ad.province == newData.by;
+                });
+            }
+
+            break;
+
+    }
+
+    return state;
+
+}
+
+
+
+
+
+let allReducers = combineReducers({ adsReducer })
+
+const myStore = createStore(allReducers);
+
+export default myStore;
+
+***************************************************
+
+
+.modal{
+  background-color: transparent;
+  box-shadow: none;
+}
+
+.adBox{
+  width: 200px;
+  height: 200px;
+  border: 1px solid brown;
+  display: inline-block;
+  margin: 10px;
+}
+
+#dropdown1{
+  /* position: absolute; */  
+  left: unset !important;
+  top:65px !important;
+  right:75px !important;
+}
+
+.dropdown-trigger{
+  position: absolute;
+}

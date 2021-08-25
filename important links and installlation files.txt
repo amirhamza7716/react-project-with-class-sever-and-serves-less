@@ -1,0 +1,110 @@
+https://nodejs.org/dist/v14.15.4/node-v14.15.4-x64.msi
+npm install create-react-app -g        or       npx create-react-app myapp
+create-react-app myapp
+npm start
+npm install react-router-dom redux react-redux
+main file ma ja ka asa import karna     (import {BrowserRouter,Route,Link} from 'react-router-dom'
+npm install react-youtube
+main file ma ja ka asa import karna  (import Youtube from 'react-youtube';
+npm init
+npm install jsonwebtoken express body-parser multer mongoose
+npm install react-bootstrap bootstrap
+npm install materialize-css@next
+install mongodb comunity dowenload
+npm install react-hook-form
+ web link   :  (https://react-hook-form.com/get-started)
+phla src wala folder ka sath server ka folder bnana ha phir sever folder ma jayain or data or build ka name ka folder bnana ha or phir us ka andar sari imgs or files rakhni html wali.
+npm install server
+server file ko run karna ka treka with cmd            :      node server.js
+web link     :     https://www.npmjs.com/package/server
+npm body-parse
+ web link     :      https://expressjs.com/
+ya libray main react ka folder ma install karni ha necha wali.
+npm install axios
+ web link     :      https://www.npmjs.com/package/axios
+ web link     :  https://developer.mozilla.org/en-US/docs/Web/API/FormData
+multer install in server file
+multer ki majoodge check karna ki comand in cmd ya ha 
+npm ls multer
+ web link     :  https://www.npmjs.com/package/multer
+web ko online cloud pa launch karna ka software ka web link
+ web link     : https://cli-assets.heroku.com/heroku-x64.exe
+ npm run build
+this command run main app us ka bad is web link pa ja ka apna account creat karna ha
+web link     :https://www.heroku.com/
+login karna ka bad creat app karna ha or us ka bad node.js select karna or us ka bad setting ma ja ka last pa ya dekhna domain ma.
+Your app can be found at https://hamzarajpootbhatti.herokuapp.com/
+us ka deploye ma jana or whan sa comand copy kar ka build ma cmd  ma jana ha or ya comand run karni ha
+1   ....     heroku login
+2....         heroku git:clone -a hamzarajpootbhatti
+3...          cd hamzarajpootbhatti
+4  ...              git add .
+5......              git commit -am "make it better"
+6.....             git push heroku master
+last pa ak error aya ga jb error a jay to dobara build ka folder ma jana ha or whan jo file ha index.htlm usa index.php bnana ha q ka heraku html nhi smjhta us ka bad sari command dobara run karni han
+us ka bad app run ho jay gi.
+ab frondend online ho gaya ha
+
+
+ '
+ab server ko online karna ka liya ya step karna han
+1. build ka folder ko copy kar ka server ka folder ma rakh dana ha 
+2.   build ka folder ma jana ha or dobara index.php ko index.html ma change kar dana ha
+3.  all command run karni ha dobara sa 
+            1   ....     heroku login
+            2....         heroku git:clone -a hamzarajpootbhatti
+            
+             3  ...              git add .
+               4......              git commit -am "make it better"
+               5.....             git push heroku master
+agr is ka bad error aya to ya command run karin ha
+             6...         git init 
+             7..    npm init
+             8...         npm install jsonwebtoken express body-parser multer mongoose
+or us ka bad dobara sari comand run karin
+
+4.server.js ma jana ha or app.use.static(server/build)   static ma ja ka build wala folder ka path dana ha 
+
+
+web link     :https://robomongo.org/download
+ya dowenload karna ka bad necha wali comand server ka cmd ma run karni
+web link         :        npm install mongoose
+1.us ka bad c drive ma data ka name ka folder bnana ha or us ma db ka name ka folder bnana ha 
+2.us ka server ka folder ma ja db ka folder bnana or us ma model ka name ka folder bnana ha or us ma kisi bi name ki file.js bnani ha or us ma mongoose ka require karna ha or Schema bnana ha
+
+EXAMPLE..
+
+let mongoose = require('mongoose');
+
+
+let userSchema = mongoose.Schema({
+    name:String,
+    email:String,
+    password:String,
+});
+
+let User = mongoose.model('user', userSchema);
+
+module.exports = User;
+
+3.us ka bad server.js ma jana ha mongoose ko require karna ha or file jo models ka folder ma bnai ho gi usa bi require karna ha
+4. is ka bad is connect karna localhost or port ka sath
+EXAMPLE..
+ let mongoose =require('mongoose');
+
+let User = require('./db/models/user');
+mongoose.connect('mongodb://localhost:27017/catDB', (err, connection)=>{
+
+    console.log(err || connection);
+
+})
+
+5.is ka robo 3d ma jana ha or jis name database creat ki ha wo dekhna ha jasa  catDB
+ya command run karni ha login ki authentication ka liya or secure karna ka liya is web pa ja ka 
+web link     :    jason web token npm
+us ka bad necha wali comand server ma run karni ha or is laibrary ko aquire karna ha server ma or token genrate karna ha
+npm install jsonwebtoken
+login ko secure karna ka bad ab kam ha database ko online karna is ka liya hama ak website pa jana ha or account creat karna ha 
+web link        :      MongoDb atlas
+
+

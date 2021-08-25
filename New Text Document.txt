@@ -1,0 +1,18 @@
+https://nodejs.org/dist/v14.15.4/node-v14.15.4-x64.msi
+npm install create-react-app -g        or       npx create-react-app myapp
+create-react-app myapp
+npm start
+npm install react-router-dom redux react-redux
+main file ma ja ka asa import karna     (import {BrowserRouter,Route,Link} from 'react-router-dom'
+npm install react-youtube
+main file ma ja ka asa import karna  (import Youtube from 'react-youtube';
+npm init
+npm install jsonwebtoken express body-parser multer mongoose
+npm install react-bootstrap bootstrap
+npm install materialize-css@next
+install mongodb comunity dowenload
+npm install react-hook-form
+c folder ma jayain or data ka name ka folder bnana ha or phir us ka undar db ka name ka folder bnanan ha
+https://react-hook-form.com/get-started
+is ka baad app ma jana ha or jhan src ka folder ha whan pa ak folder bnana ha server ka name ka us ma server.js file bnani thi or server ka folder ma command run karni ya wali.
+npm install express mongoose multer body-parser

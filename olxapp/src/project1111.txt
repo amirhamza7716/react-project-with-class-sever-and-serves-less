@@ -1,0 +1,214 @@
+APP.JS
+
+
+import './App.css';
+import React from 'react';
+import nSTore from './store/store'
+import { Provider } from 'react-redux';
+import {BrowserRouter,Route,Link} from 'react-router-dom'
+import Dashboard from './camponent/dashboard/dashboard'
+import Table from './camponent/data/data'
+import Form from './camponent/addForm/form'
+import Display from './camponent/display/display'
+//import Signup from './component/signup/signup'
+
+
+export default function App(props) {
+
+  
+   
+
+    return <div id="header">
+        <Provider store={nSTore}>
+        <BrowserRouter>
+          <Route exact path="/" render={() => {
+          return <>
+          <h1>Header</h1>
+          <Link to="/signup"><button>Create account</button></Link>
+          &nbsp;&nbsp;<Link to="/login"><button>Login Account</button></Link>
+          &nbsp;&nbsp;<Link to="/table"><button>ALL USER</button></Link>
+          &nbsp;&nbsp;<Link to="/display"><button>ALL Adds</button></Link>
+          &nbsp;&nbsp;<Link to="/dashboard"></Link>
+          &nbsp;&nbsp;<Link to="/addform"></Link>
+          &nbsp;&nbsp;<Link to="/editform"></Link>
+          </>
+
+          }} />
+          <Route path="/signup" render={() => {
+            return <div>
+            <input id="name" type="text" placeholder="Enter the name"/>
+            <input  id="email" type="text" placeholder="Enter the email"/>
+            <input id="password" type="password" placeholder="Enter the password"/>
+              
+            <button onClick={()=>{
+              nSTore.dispatch({
+                type:"Singup",
+                myobject:{ myname:document.getElementById('name').value,
+                myemail:document.getElementById('email').value,
+                mypassword:document.getElementById('password').value,
+                
+              }
+                })
+            }}>signup</button>
+          </div>
+          }} />
+
+          <Route path="/login" render={(props) => {
+            return <div>
+            <input  id="email" type="text" placeholder="Enter the email"/>
+            <input id="password" type="password" placeholder="Enter the password"/>
+            <button onClick={()=>{
+              nSTore.dispatch({
+                type:"Login",
+                props,
+                myobject:{
+                myemail:document.getElementById('email').value,
+                mypassword:document.getElementById('password').value}
+                
+                })
+            }}>Login</button>
+          </div>
+          }} />
+          
+          <Route path="/table" render={() => {
+            return <Table/>
+        }} />
+           <Route path="/dashboard" component={Dashboard}/>
+           {/* <Route path="/addform" component={Form}/> */}
+           <Route path="/addform" render={() => {
+            return <div>
+              <h1>ADDS FORM</h1> 
+              <input id="a" type="text" placeholder="Enter the coments"/>
+              <input  id="b" type="text" placeholder="Enter the description"/>
+              <input id="c" type="file" name="user-image"/>
+              
+              <button onClick={()=>{
+              nSTore.dispatch({
+                type:"Form",
+                props,
+                myobject:{ myaddname:document.getElementById('a').value,
+                myadddiscription:document.getElementById('b').value,
+                myaddimg:URL.createObjectURL(document.getElementById('c').files[0]),
+                
+              }
+                })
+            }}>submit</button>
+            </div>
+        }}/>
+        <Route path="/display" component={Display}/>
+        <Route path="/editform" render={() => {
+            return <div>
+              <h1>ADDS FORM</h1> 
+              <input id="a" type="text" placeholder="Enter the coments"/>
+              <input  id="b" type="text" placeholder="Enter the description"/>
+              <input id="c" type="file" name="user-image"/>
+              
+              <button onClick={()=>{
+              nSTore.dispatch({
+                type:"Form",
+                props,
+                myobject:{ myaddname:document.getElementById('a').value,
+                myadddiscription:document.getElementById('b').value,
+                myaddimg:URL.createObjectURL(document.getElementById('c').files[0]),
+                
+              }
+                })
+            }}>submit</button>
+            </div>
+        }}/>
+          </BrowserRouter>
+
+        </Provider>
+
+    </div>
+
+}
+*************************************************************
+STORE.JS
+
+import { createStore, combineReducers } from 'redux';
+let data3 = { users: [] };
+function BankusersAccount(oldData = data3, action) {
+
+    oldData = { ...oldData };
+   
+    if (action.type == "Singup") {
+        oldData.users.push(action.myobject);
+    } else if (action.type =="Login") {
+        let targetuser= oldData.users.find((user) => {
+         if(action.myobject.myemail == user.myemail && action.myobject.mypassword == user.mypassword){
+           return true;
+          }});
+         if (targetuser) {
+
+            alert("mil gya");
+            action.props.history.push("/dashboard");
+            
+        } else {
+            alert("nahi mila user");
+        }
+    }
+    else if (action.type =="form") {
+    //     // d.addsss.push(action.myobject);
+         oldData.users.push(action.myobject);
+     }
+    return oldData;
+
+}
+
+
+let data2 = { userss: [] };
+
+function AddsReducer(oldData = data2, newData) {
+
+    oldData = { ...oldData };
+
+    if (newData.type == "Form") {
+
+        oldData.userss.push(newData.myobject);
+
+    }else if(newData.type=="Delet"){
+       
+                oldData.userss.splice(newData.myobject,1)
+    }else if(newData.type=="Edit"){
+       
+        oldData.userss.splice(newData.myobject,1)
+        newData.props.history.push("/editform");
+}
+       // oldData.userss.splice(newData.myobject,1);}
+    
+
+    return oldData;
+
+}
+let allReducers = combineReducers({BankusersAccount,AddsReducer})
+
+const nStore = createStore(allReducers,  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+export default nStore;
+*********************************************************
+dashboard.js
+
+
+import React from 'react';
+import { connect } from 'react-redux';
+
+
+  function Dashboard(props) {
+
+       return<div>
+        <h1>Dashboard</h1>
+        <button onClick={(evt)=>{
+          props.history.push("/addform");
+        }}>CreateAdd</button>    
+   </div> }
+   let newTable = connect((store) => {
+
+      return {
+        myUsers:store.BankusersAccount
+      };
+        })(Dashboard)
+
+
+export default newTable;
+**********************************************************

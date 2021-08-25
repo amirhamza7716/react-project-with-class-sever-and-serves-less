@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="myForm">
+        <div>
+            <input id="Name" type="text" placeholder="enter the name">
+        </div>
+
+        <div>
+            <input id="Email" type="text"placeholder="enter the email">
+        </div>
+
+        <div>
+            <input id="namber" type="text"placeholder="enter the phone no">
+        </div>
+        <div>
+            <input id="startCity" type="text" placeholder="enter the starting city">
+        </div>
+        <div>
+            <input id="destinationCity" type="text" placeholder="enter the destination city">
+        </div>
+
+        <button onclick=alotbogi()>submit</button>
+
+    </div>
+<script>
+    rail=[
+        fsd=[
+           
+],
+           shakhupura={
+            bogi5:[seat5=[]],
+           bogi6:[seat6=[]],
+           bogi7:[seat7=[]],
+           bogi8:[seat8=[]]
+        },
+           lahore={
+            bogi9:[seat9=[]],
+           bogi10:[seat10=[]]
+          
+        }
+    
+            
+    ];
+    function alotbogi(){
+        let start=startCity.value;
+        let end=destinationCity.value;
+        let user={
+            Username:Name.value,
+            Useremail:Email.value,
+            Usernamber:namber.value,
+            Userstart:startCity.value,
+            Userdestination:destinationCity.value}
+        
+        if(start=="tobha" && end=="fsd"){
+            rail.find((evt) => {
+                if(evt==fsd){
+                  fsd.push(user);
+                }})        
+         
+        }else if(start=="fsd" && end=="shakhupura"){
+
+        }else if(start=="shakhupura" && end=="lahore"){
+
+        }else if(start=="tobha" && end=="lahore"){
+
+}
+    }
+
+</script>
+</body>
+</html>
