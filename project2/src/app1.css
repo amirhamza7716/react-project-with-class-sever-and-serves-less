@@ -1,0 +1,13 @@
+.bar{
+    color:blue;
+    background-color: chartreuse;
+    align-items: center;
+    
+    margin:auto;
+}
+.button{
+    background-position: center;
+    background-color: cyan;
+    background-size: contain;
+
+}
